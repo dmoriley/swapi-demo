@@ -22,6 +22,9 @@ $angular-dark-theme: mat.define-dark-theme(
 
 @include mat.all-component-themes($angular-dark-theme);
 
+// app imports
+@import "styles/variables";
+
 html,
 body {
   height: 100%;

@@ -1,0 +1,17 @@
+// Media breakpoints (sizes same as angular material breakpoints)
+$breakpoint-xsmall: "screen and (max-width: 37.49875em)"; // 599.98px
+$breakpoint-not-xsmall: "screen and (min-width: 37.49875em)"; // 599.98px
+$breakpoint-small: "screen and (min-width: 37.5em) and (max-width: 59.99875em)"; // 600 px - 959.98px
+$breakpoint-not-small: "screen and (min-width: 59.99875em)"; // 959.98px
+$breakpoint-medium: "screen and (min-width: 60em) and (max-width: 79.99875)"; // 960px - 1279.98 px;
+$breakpoint-large: "screen and (min-width: 80em)"; // 1280px
+
+// Fonts
+$font-size-1: 2.5rem; // 40px
+$font-size-2: 2.0625rem; // 33px
+$font-size-3: 1.5rem; // 24px
+$font-size-4: 1.3125rem; // 21px
+$font-size-5: 1rem; // 16px
+$font-size-6: 0.875rem; // 14px
+$font-size-7: 0.75rem;
+$font-size-8: 0.625rem;
