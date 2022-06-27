@@ -10,9 +10,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { DOCUMENT, documentFactory, WINDOW, windowFactory } from './lib';
+import { PeoplePageComponent } from './pages';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PeoplePageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
