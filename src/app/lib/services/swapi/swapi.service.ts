@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { SwapiPeople } from './swapi.types';
+import { SwapiPeople, SwapiResponse } from './swapi.types';
 
 @Injectable({
   providedIn: 'root',
@@ -30,11 +30,23 @@ export class SwapiService {
   }
 
   getAllPeople() {
-    return this.http.get<SwapiPeople[]>(this.baseApi + '/people').pipe(
-      catchError((error: HttpErrorResponse) => {
-        return throwError(() => processErrorResponse(error));
-      })
-    );
+    return this.http
+      .get<SwapiResponse<SwapiPeople>>(this.baseApi + 'people')
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return throwError(() => processErrorResponse(error));
+        })
+      );
+  }
+
+  getAllPeople2() {
+    return this.http
+      .get<SwapiResponse<SwapiPeople>>(this.baseApi + 'people')
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return throwError(() => processErrorResponse(error));
+        })
+      );
   }
 }
 

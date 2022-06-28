@@ -1,0 +1,14 @@
+table {
+  margin: 0 auto;
+}
+
+.spinner-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: var(--viewportHeightOnDocument);
+  width: var(--viewportWidthOnDocument);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

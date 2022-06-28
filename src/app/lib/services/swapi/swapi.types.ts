@@ -1,3 +1,10 @@
+export interface SwapiResponse<T> {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: T[];
+}
+
 export interface SwapiPeople extends SwapiBase {
   birth_year: string;
   eye_color: string;

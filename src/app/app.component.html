@@ -10,7 +10,7 @@
       >
         <mat-icon>menu</mat-icon>
       </button>
-      <span class="ml1">My App</span>
+      <a class="ml2" routerLink="/">Swapi Demo</a>
     </div>
     <div>
       <button
@@ -34,14 +34,11 @@
   <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #sidenav [mode]="isMobile ? 'over' : 'side'">
       <mat-nav-list>
-        <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{
-          nav
-        }}</a>
+        <a mat-list-item routerLink="people">People</a>
       </mat-nav-list>
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <!-- <p *ngFor="let content of fillerContent">{{ content }}</p> -->
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
