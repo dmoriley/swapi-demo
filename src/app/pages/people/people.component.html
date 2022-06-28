@@ -1,4 +1,21 @@
 <div class="table-container w-100 w-75-ns">
+  <mat-form-field class="mh-auto w-100 w-50-ns mb3">
+    <mat-label>Filter</mat-label>
+    <input matInput type="text" #filterInput maxlength="50" />
+    <mat-hint align="start"><strong>Filter on name</strong> </mat-hint>
+    <mat-hint align="end"
+      >{{ filterInput.value.length }} / {{ filterInput.maxLength }}</mat-hint
+    >
+    <button
+      *ngIf="filterInput.value.length > 0"
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="clearFilterInput()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
   <div class="spinner-container" *ngIf="dataSource.loading$ | async">
     <mat-spinner></mat-spinner>
   </div>
@@ -34,6 +51,7 @@
     </table>
 
     <mat-paginator
+      class="mat-elevation-z8"
       [length]="dataSource.totalItems"
       [pageSize]="10"
       showFirstLastButtons

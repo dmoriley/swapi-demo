@@ -4,6 +4,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -20,6 +21,9 @@ import {
   takeUntil,
   tap,
   take,
+  fromEvent,
+  debounceTime,
+  distinctUntilChanged,
 } from 'rxjs';
 import { SwapiService } from 'src/app/lib/services/swapi/swapi.service';
 import { SwapiPeople } from 'src/app/lib/services/swapi/swapi.types';
@@ -40,6 +44,7 @@ export class PeoplePageComponent implements OnInit, AfterViewInit, OnDestroy {
   displayedColumns = ['name', 'height', 'mass', 'hair_color', 'eye_color'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('filterInput') filterInput: ElementRef;
 
   constructor(private swapi: SwapiService, private cdr: ChangeDetectorRef) {}
 
@@ -55,6 +60,18 @@ export class PeoplePageComponent implements OnInit, AfterViewInit, OnDestroy {
         tap(() => this.loadPeoplePage())
       )
       .subscribe();
+
+    fromEvent(this.filterInput.nativeElement, 'keyup')
+      .pipe(
+        takeUntil(this._isDestroyed),
+        debounceTime(300),
+        distinctUntilChanged(),
+        tap(() => {
+          this.paginator.pageIndex = 0;
+          this.loadPeoplePage();
+        })
+      )
+      .subscribe();
   }
 
   ngOnDestroy(): void {
@@ -63,7 +80,16 @@ export class PeoplePageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   loadPeoplePage() {
-    this.dataSource.loadPeople(this.paginator.pageIndex + 1);
+    this.dataSource.loadPeople(
+      this.paginator.pageIndex + 1,
+      this.filterInput.nativeElement.value
+    );
+  }
+
+  clearFilterInput() {
+    this.filterInput.nativeElement.value = '';
+    this.paginator.pageIndex = 0;
+    this.loadPeoplePage();
   }
 }
 
@@ -93,11 +119,11 @@ class PeopleDataSource extends DataSource<SwapiPeople> {
     this._isDestroyed.complete();
   }
 
-  loadPeople(page = 1) {
+  loadPeople(page = 1, search?: string) {
     this._loading.next(true);
 
     this.swapi
-      .getAllPeople(page)
+      .getAllPeople(page, search)
       .pipe(
         take(1),
         tap((response) => {

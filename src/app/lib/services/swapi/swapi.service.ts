@@ -33,11 +33,13 @@ export class SwapiService {
       ) as unknown as Observable<T>; // TS thinks the type of Observable<HttpEvent<T>>, need to cast
   }
 
-  getAllPeople(page = 1) {
+  getAllPeople(page = 1, search?: string) {
+    const paramObj: { page: number; search?: string } = { page };
+    if (search && search.length > 0) {
+      paramObj.search = search;
+    }
     const params = new HttpParams({
-      fromObject: {
-        page,
-      },
+      fromObject: paramObj,
     });
     return this.get<SwapiResponse<SwapiPeople>>(this.baseApi + 'people', {
       params,

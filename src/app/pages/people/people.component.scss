@@ -3,6 +3,10 @@
   position: relative;
 }
 
+mat-form-field {
+  display: block;
+}
+
 .spinner-container {
   position: absolute;
   min-height: 300px;
