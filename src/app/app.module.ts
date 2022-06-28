@@ -23,9 +23,10 @@ import {
   WINDOW,
   windowFactory,
 } from './lib';
+import { DataTableComponent } from './lib/components/data-table/data-table.component';
 
 @NgModule({
-  declarations: [AppComponent, PeoplePageComponent],
+  declarations: [AppComponent, PeoplePageComponent, DataTableComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -47,5 +48,6 @@ import {
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
+  exports: [DataTableComponent],
 })
 export class AppModule {}

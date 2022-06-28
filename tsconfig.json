@@ -23,6 +23,8 @@
     "lib": ["es2020", "dom"],
     "paths": {
       "@lib/*": ["app/lib/*"],
+      "@components/*": ["app/lib/components/*"],
+      "@services/*": ["app/lib/services/*"],
       "@pages/*": ["src/app/pages/*"],
       "@env/*": ["src/environments/*"]
     }

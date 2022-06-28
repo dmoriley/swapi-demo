@@ -1,0 +1,20 @@
+.table-container {
+  margin: 0 auto;
+  position: relative;
+}
+
+mat-form-field {
+  display: block;
+}
+
+.spinner-container {
+  position: absolute;
+  min-height: 300px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.705);
+  z-index: 100;
+}

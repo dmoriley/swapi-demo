@@ -1,30 +1,13 @@
-import { DataSource } from '@angular/cdk/table';
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
-  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import {
-  BehaviorSubject,
-  catchError,
-  finalize,
-  map,
-  Observable,
-  of,
-  Subject,
-  takeUntil,
-  tap,
-  take,
-  fromEvent,
-  debounceTime,
-  distinctUntilChanged,
-} from 'rxjs';
+import { BaseDataSource } from 'src/app/lib';
 import { SwapiService } from 'src/app/lib/services/swapi/swapi.service';
 import { SwapiPeople } from 'src/app/lib/services/swapi/swapi.types';
 
@@ -32,15 +15,10 @@ import { SwapiPeople } from 'src/app/lib/services/swapi/swapi.types';
   selector: 'sw-people-page',
   templateUrl: './people.component.html',
   styleUrls: ['./people.component.scss'],
-  host: {
-    class: 'db pa2',
-  },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PeoplePageComponent implements OnInit, AfterViewInit, OnDestroy {
-  private _isDestroyed = new Subject<void>();
-
-  dataSource: PeopleDataSource;
+export class PeoplePageComponent implements OnInit {
+  dataSource: BaseDataSource<SwapiPeople>;
   displayedColumns = ['name', 'height', 'mass', 'hair_color', 'eye_color'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -49,90 +27,8 @@ export class PeoplePageComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private swapi: SwapiService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.dataSource = new PeopleDataSource(this.swapi);
-    this.dataSource.loadPeople();
-  }
-
-  ngAfterViewInit() {
-    this.paginator.page
-      .pipe(
-        takeUntil(this._isDestroyed),
-        tap(() => this.loadPeoplePage())
-      )
-      .subscribe();
-
-    fromEvent(this.filterInput.nativeElement, 'keyup')
-      .pipe(
-        takeUntil(this._isDestroyed),
-        debounceTime(300),
-        distinctUntilChanged(),
-        tap(() => {
-          this.paginator.pageIndex = 0;
-          this.loadPeoplePage();
-        })
-      )
-      .subscribe();
-  }
-
-  ngOnDestroy(): void {
-    this._isDestroyed.next();
-    this._isDestroyed.complete();
-  }
-
-  loadPeoplePage() {
-    this.dataSource.loadPeople(
-      this.paginator.pageIndex + 1,
-      this.filterInput.nativeElement.value
+    this.dataSource = new BaseDataSource(
+      this.swapi.getAllPeople.bind(this.swapi)
     );
-  }
-
-  clearFilterInput() {
-    this.filterInput.nativeElement.value = '';
-    this.paginator.pageIndex = 0;
-    this.loadPeoplePage();
-  }
-}
-
-class PeopleDataSource extends DataSource<SwapiPeople> {
-  private _isDestroyed = new Subject<void>();
-  private _source = new BehaviorSubject<SwapiPeople[]>([]);
-  private _loading = new BehaviorSubject(false);
-
-  totalItems: number;
-  loading$ = this._loading.asObservable();
-
-  constructor(private swapi: SwapiService) {
-    super();
-    this.loadPeople();
-  }
-
-  connect(): Observable<SwapiPeople[]> {
-    return this._source.asObservable();
-  }
-
-  disconnect() {
-    // complete subscriptions
-    this._loading.complete();
-    this._source.complete();
-    // mark as destroyed
-    this._isDestroyed.next();
-    this._isDestroyed.complete();
-  }
-
-  loadPeople(page = 1, search?: string) {
-    this._loading.next(true);
-
-    this.swapi
-      .getAllPeople(page, search)
-      .pipe(
-        take(1),
-        tap((response) => {
-          this.totalItems = response.count;
-        }),
-        map((response) => response.results),
-        catchError(() => of([])),
-        finalize(() => this._loading.next(false))
-      )
-      .subscribe((people) => this._source.next(people));
   }
 }
