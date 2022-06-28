@@ -1,4 +1,9 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpParams,
+  HttpEvent,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { SwapiPeople, SwapiResponse } from './swapi.types';
@@ -15,38 +20,28 @@ export class SwapiService {
    * Function to call http get
    * @param { string } url url to call http get
    * @param { OptionsArgs } options request option
-   * @param { boolean } jwt set to true for calls that need authorization
-   * @param { boolean } plain set plain to true to prevent any customs headers from being added
-   * @param { boolean } useOktaJWTToken set to true to use okta tokens instead of legacy
    * @return { Observable<T | ApiError> } if the request is successful, it would return observable
    * of type T. If not, it would throw observable of type ApiError.
    */
-  private get(url: string, options): Observable<any> {
-    return this.http.get(url, options).pipe(
-      catchError((error: HttpErrorResponse) => {
-        return throwError(() => processErrorResponse(error));
-      })
-    );
-  }
-
-  getAllPeople() {
+  private get<T>(url: string, options: any): Observable<T> {
     return this.http
-      .get<SwapiResponse<SwapiPeople>>(this.baseApi + 'people')
+      .get<T>(url, { ...options, observe: 'body', responseType: 'json' })
       .pipe(
         catchError((error: HttpErrorResponse) => {
           return throwError(() => processErrorResponse(error));
         })
-      );
+      ) as unknown as Observable<T>; // TS thinks the type of Observable<HttpEvent<T>>, need to cast
   }
 
-  getAllPeople2() {
-    return this.http
-      .get<SwapiResponse<SwapiPeople>>(this.baseApi + 'people')
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          return throwError(() => processErrorResponse(error));
-        })
-      );
+  getAllPeople(page = 1) {
+    const params = new HttpParams({
+      fromObject: {
+        page,
+      },
+    });
+    return this.get<SwapiResponse<SwapiPeople>>(this.baseApi + 'people', {
+      params,
+    });
   }
 }
 

@@ -20,6 +20,7 @@ import {
   WINDOW,
   windowFactory,
 } from './lib';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [AppComponent, PeoplePageComponent],
@@ -31,6 +32,7 @@ import {
     MatSidenavModule,
     MatListModule,
     MatTableModule,
+    MatPaginatorModule,
     MatProgressSpinnerModule,
     FormsModule,
     BrowserAnimationsModule,
