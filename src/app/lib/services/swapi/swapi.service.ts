@@ -2,11 +2,10 @@ import {
   HttpClient,
   HttpErrorResponse,
   HttpParams,
-  HttpEvent,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, throwError } from 'rxjs';
-import { SwapiPeople, SwapiResponse } from './swapi.types';
+import { catchError, Observable, throwError } from 'rxjs';
+import { SwapiResponse } from './swapi.types';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +22,7 @@ export class SwapiService {
    * @return { Observable<T | ApiError> } if the request is successful, it would return observable
    * of type T. If not, it would throw observable of type ApiError.
    */
-  private get<T>(url: string, options: any): Observable<T> {
+  getResource<T>(url: string, options: any = {}): Observable<T> {
     return this.http
       .get<T>(url, { ...options, observe: 'body', responseType: 'json' })
       .pipe(
@@ -33,7 +32,7 @@ export class SwapiService {
       ) as unknown as Observable<T>; // TS thinks the type of Observable<HttpEvent<T>>, need to cast
   }
 
-  getAllPeople(page = 1, search?: string) {
+  getPageResource<T>(resourceName: string, page = 1, search?: string) {
     const paramObj: { page: number; search?: string } = { page };
     if (search && search.length > 0) {
       paramObj.search = search;
@@ -41,7 +40,7 @@ export class SwapiService {
     const params = new HttpParams({
       fromObject: paramObj,
     });
-    return this.get<SwapiResponse<SwapiPeople>>(this.baseApi + 'people', {
+    return this.getResource<SwapiResponse<T>>(this.baseApi + resourceName, {
       params,
     });
   }

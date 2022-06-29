@@ -28,7 +28,7 @@ export class PeoplePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataSource = new BaseDataSource(
-      this.swapi.getAllPeople.bind(this.swapi)
+      this.swapi.getPageResource<SwapiPeople>.bind(this.swapi, 'people')
     );
   }
 }
