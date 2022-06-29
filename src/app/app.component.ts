@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { DocumentService } from './lib';
 import { BreakpointService } from './lib/services/breakpoint/breakpoint.service';
 

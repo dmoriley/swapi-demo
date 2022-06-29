@@ -12,19 +12,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import {
-  BehaviorSubject,
-  catchError,
-  finalize,
-  map,
-  Observable,
-  of,
+  debounceTime,
+  distinctUntilChanged,
+  fromEvent,
   Subject,
   takeUntil,
   tap,
-  take,
-  fromEvent,
-  debounceTime,
-  distinctUntilChanged,
 } from 'rxjs';
 import { BaseDataSource } from '../../classes';
 @Component({
@@ -32,9 +25,6 @@ import { BaseDataSource } from '../../classes';
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    class: 'db pa2',
-  },
 })
 export class DataTableComponent implements OnInit, AfterViewInit, OnDestroy {
   private _isDestroyed = new Subject<void>();
