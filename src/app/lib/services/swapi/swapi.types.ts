@@ -5,7 +5,7 @@ export interface SwapiResponse<T> {
   results: T[];
 }
 
-export interface SwapiPeople extends SwapiBase {
+export interface SwapiPerson extends SwapiBase {
   birth_year: string;
   eye_color: string;
   /** An array of film resource URLs that this person has been in. */
@@ -74,7 +74,7 @@ export interface SwapiStarship extends SwapiBase {
   starship_class: string;
 }
 
-export interface SwapiVehicles extends SwapiBase {
+export interface SwapiVehicle extends SwapiBase {
   cargo_capacity: string;
   consumables: string;
   cost_in_credits: string;
@@ -109,7 +109,7 @@ export interface SwapiSpecies extends SwapiBase {
   skin_colors: string;
 }
 
-export interface SwapiPlanets extends SwapiBase {
+export interface SwapiPlanet extends SwapiBase {
   climate: string;
   diameter: string;
   /** An array of Film URL Resources that this planet has appeared in */

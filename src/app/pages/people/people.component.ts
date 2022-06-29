@@ -8,7 +8,7 @@ import {
 import { MatPaginator } from '@angular/material/paginator';
 import { BaseDataSource } from 'src/app/lib';
 import { SwapiService } from 'src/app/lib/services/swapi/swapi.service';
-import { SwapiPeople } from 'src/app/lib/services/swapi/swapi.types';
+import { SwapiPerson } from 'src/app/lib/services/swapi/swapi.types';
 
 @Component({
   selector: 'sw-people-page',
@@ -17,7 +17,7 @@ import { SwapiPeople } from 'src/app/lib/services/swapi/swapi.types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PeoplePageComponent implements OnInit {
-  dataSource: BaseDataSource<SwapiPeople>;
+  dataSource: BaseDataSource<SwapiPerson>;
   displayedColumns = ['name', 'height', 'mass', 'hair_color', 'eye_color'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -27,7 +27,7 @@ export class PeoplePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataSource = new BaseDataSource(
-      this.swapi.getPageResource<SwapiPeople>.bind(this.swapi, 'people')
+      this.swapi.getPageResource<SwapiPerson>.bind(this.swapi, 'people')
     );
   }
 }
