@@ -36,6 +36,7 @@ import { EntityDetailsPageComponent } from './pages/entity-details-page/entity-d
 import { HomePageComponent } from './pages/home/home.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { LazyLoadDropdownComponent } from './lib/components/lazy-load-dropdown/lazy-load-dropdown.component';
+import { FilmsPageComponent } from './pages/films/films.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { LazyLoadDropdownComponent } from './lib/components/lazy-load-dropdown/l
     PageNotFoundComponent,
     HomePageComponent,
     LazyLoadDropdownComponent,
+    FilmsPageComponent,
   ],
   imports: [
     BrowserModule,

@@ -17,3 +17,9 @@ h1 {
   justify-content: space-between;
   width: 100%;
 }
+
+.elipses {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

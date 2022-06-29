@@ -1,11 +1,7 @@
 import {
   ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
+  Component, OnInit
 } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
 import { BaseDataSource } from 'src/app/lib';
 import { SwapiService } from 'src/app/lib/services/swapi/swapi.service';
 import { SwapiPerson } from 'src/app/lib/services/swapi/swapi.types';
@@ -20,8 +16,6 @@ export class PeoplePageComponent implements OnInit {
   dataSource: BaseDataSource<SwapiPerson>;
   displayedColumns = ['name', 'height', 'mass', 'hair_color', 'eye_color'];
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild('filterInput') filterInput: ElementRef;
 
   constructor(private swapi: SwapiService) {}
 

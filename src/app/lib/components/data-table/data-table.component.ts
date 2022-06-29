@@ -82,8 +82,8 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   navigateToDetailsPage(row: any) {
     this.router.navigate(
-      [`/${this.route.snapshot.url[0].path}/details`, row.name],
-      { state: { url: row.url, name: row.name } }
+      [`/${this.route.snapshot.url[0].path}/details`, row.name || row.title],
+      { state: { url: row.url, name: row.name || row.title } }
     );
   }
 }

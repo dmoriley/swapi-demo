@@ -3,7 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { EntityDetailsPageComponent } from '@pages/entity-details-page/entity-details-page.component';
 import { PageNotFoundComponent } from '@pages/page-not-found/page-not-found.component';
 import { PreventDirectNavigationGuard } from './lib/guards';
-import { HomePageComponent, PeoplePageComponent } from './pages';
+import {
+  FilmsPageComponent,
+  HomePageComponent,
+  PeoplePageComponent,
+} from './pages';
 
 const routes: Routes = [
   {
@@ -17,8 +21,19 @@ const routes: Routes = [
     component: PeoplePageComponent,
   },
   {
+    path: 'films',
+    title: 'Films',
+    component: FilmsPageComponent,
+  },
+  {
     path: 'people/details/:id',
     title: 'People Details',
+    canActivate: [PreventDirectNavigationGuard],
+    component: EntityDetailsPageComponent,
+  },
+  {
+    path: 'films/details/:id',
+    title: 'Films Details',
     canActivate: [PreventDirectNavigationGuard],
     component: EntityDetailsPageComponent,
   },
