@@ -24,9 +24,19 @@ import {
   windowFactory,
 } from './lib';
 import { DataTableComponent } from './lib/components/data-table/data-table.component';
+import { EntityDetailsPageComponent } from './pages/entity-details-page/entity-details-page.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { HomePageComponent } from './pages/home/home.component';
 
 @NgModule({
-  declarations: [AppComponent, PeoplePageComponent, DataTableComponent],
+  declarations: [
+    AppComponent,
+    PeoplePageComponent,
+    DataTableComponent,
+    EntityDetailsPageComponent,
+    PageNotFoundComponent,
+    HomePageComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

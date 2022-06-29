@@ -18,3 +18,11 @@ mat-form-field {
   background: rgba(0, 0, 0, 0.705);
   z-index: 100;
 }
+
+$color: black;
+.detail-row {
+  cursor: pointer;
+  &:hover {
+    background-color: lighten($color, 50%);
+  }
+}

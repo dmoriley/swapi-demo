@@ -9,6 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import {
   BehaviorSubject,
@@ -44,7 +45,7 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('filterInput') filterInput: ElementRef;
 
-  constructor() {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.dataSource.loadItems();
@@ -87,5 +88,12 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnDestroy {
     this.filterInput.nativeElement.value = '';
     this.paginator.pageIndex = 0;
     this.loadPage();
+  }
+
+  navigateToDetailsPage(row: any) {
+    this.router.navigate(
+      [`/${this.route.snapshot.url[0].path}/details`, row.name],
+      { state: { url: row.url } }
+    );
   }
 }

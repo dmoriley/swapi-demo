@@ -47,7 +47,12 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        class="detail-row"
+        (click)="navigateToDetailsPage(row)"
+      ></tr>
     </table>
 
     <mat-paginator
