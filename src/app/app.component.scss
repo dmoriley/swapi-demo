@@ -1,3 +1,5 @@
+@import "variables";
+
 mat-toolbar {
   justify-content: space-between;
 }
@@ -16,4 +18,14 @@ mat-toolbar {
   /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
      causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
   flex: 1;
+}
+
+mat-sidenav-content {
+  padding: 1rem;
+}
+@media #{$breakpoint-not-small} {
+  mat-sidenav-content {
+    padding-left: 16rem;
+    padding-right: 16rem;
+  }
 }

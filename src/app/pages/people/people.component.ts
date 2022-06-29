@@ -1,6 +1,5 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ElementRef,
   OnInit,
@@ -24,7 +23,7 @@ export class PeoplePageComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('filterInput') filterInput: ElementRef;
 
-  constructor(private swapi: SwapiService, private cdr: ChangeDetectorRef) {}
+  constructor(private swapi: SwapiService) {}
 
   ngOnInit(): void {
     this.dataSource = new BaseDataSource(

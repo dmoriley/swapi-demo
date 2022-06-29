@@ -1,4 +1,41 @@
-<p>entity-details-page works!</p>
-<pre>
-  {{ extras | json }}
-</pre>
+<mat-card class="example-card">
+  <mat-card-title>{{ extras.state.name }}</mat-card-title>
+  <mat-card-content *ngIf="data$ | async | keyvalue as data">
+    <mat-divider></mat-divider>
+    <mat-list role="list">
+      <ng-container *ngFor="let row of data; index as i">
+        <ng-container
+          [ngTemplateOutlet]="isArray(row.value) ? expansionRow : staticRow"
+          [ngTemplateOutletContext]="{ $implicit: row, index: i }"
+        ></ng-container>
+      </ng-container>
+    </mat-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
+  <mat-card-footer *ngIf="isLoading$ | async">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>
+
+<ng-template #staticRow let-rowData>
+  <mat-list-item>
+    <div class="detail-row">
+      <span>
+        {{ rowData.key }}
+      </span>
+      <span>
+        {{ rowData.value }}
+      </span>
+    </div>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+</ng-template>
+
+<ng-template #expansionRow let-rowData let-index>
+  <app-lazy-load-dropdown [title]="rowData.key" [urls]="rowData.value">
+  </app-lazy-load-dropdown>
+  <mat-divider></mat-divider>
+</ng-template>

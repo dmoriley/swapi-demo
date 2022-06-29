@@ -1,12 +1,19 @@
 import { NgModule } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
+import { MatRippleModule } from '@angular/material/core';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
+
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatRippleModule } from '@angular/material/core';
+
 import { BrowserModule } from '@angular/platform-browser';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,8 +33,9 @@ import {
 } from './lib';
 import { DataTableComponent } from './lib/components/data-table/data-table.component';
 import { EntityDetailsPageComponent } from './pages/entity-details-page/entity-details-page.component';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { HomePageComponent } from './pages/home/home.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { LazyLoadDropdownComponent } from './lib/components/lazy-load-dropdown/lazy-load-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -37,19 +45,24 @@ import { HomePageComponent } from './pages/home/home.component';
     EntityDetailsPageComponent,
     PageNotFoundComponent,
     HomePageComponent,
+    LazyLoadDropdownComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MatToolbarModule,
     MatIconModule,
+    MatDividerModule,
     MatSidenavModule,
     MatListModule,
     MatTableModule,
     MatPaginatorModule,
     MatInputModule,
     MatRippleModule,
+    MatCardModule,
+    MatExpansionModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,

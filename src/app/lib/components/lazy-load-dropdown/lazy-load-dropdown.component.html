@@ -1,0 +1,12 @@
+<mat-expansion-panel (click)="loadRowData()">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{ title }}
+    </mat-panel-title>
+    <mat-panel-description> See more </mat-panel-description>
+  </mat-expansion-panel-header>
+  <ng-container *ngIf="!isLoading">
+    <p *ngFor="let item of data">{{ item }}</p>
+  </ng-container>
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+</mat-expansion-panel>
