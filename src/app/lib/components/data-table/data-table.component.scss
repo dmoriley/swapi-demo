@@ -23,6 +23,6 @@ $color: black;
 .detail-row {
   cursor: pointer;
   &:hover {
-    background-color: lighten($color, 50%);
+    background-color: lighten($color, 10%);
   }
 }

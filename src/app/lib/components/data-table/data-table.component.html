@@ -20,40 +20,40 @@
     <mat-spinner></mat-spinner>
   </div>
   <div>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="height">
-        <th mat-header-cell *matHeaderCellDef>Height</th>
-        <td mat-cell *matCellDef="let element">{{ element.height }}</td>
+        <mat-header-cell *matHeaderCellDef>Height</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.height }}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="mass">
-        <th mat-header-cell *matHeaderCellDef>Mass</th>
-        <td mat-cell *matCellDef="let element">{{ element.mass }}</td>
+        <mat-header-cell *matHeaderCellDef>Mass</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.mass }}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="hair_color">
-        <th mat-header-cell *matHeaderCellDef>Hair Colour</th>
-        <td mat-cell *matCellDef="let element">{{ element.hair_color }}</td>
+        <mat-header-cell *matHeaderCellDef>Hair Colour</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.hair_color }}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="eye_color">
-        <th mat-header-cell *matHeaderCellDef>Eye Colour</th>
-        <td mat-cell *matCellDef="let element">{{ element.eye_color }}</td>
+        <mat-header-cell *matHeaderCellDef>Eye Colour</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.eye_color }}</mat-cell>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr
-        mat-row
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row
+        matRipple
         *matRowDef="let row; columns: displayedColumns"
         class="detail-row"
         (click)="navigateToDetailsPage(row)"
-      ></tr>
-    </table>
+      ></mat-row>
+    </mat-table>
 
     <mat-paginator
       class="mat-elevation-z8"

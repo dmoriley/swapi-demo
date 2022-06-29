@@ -6,6 +6,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatRippleModule } from '@angular/material/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -47,6 +48,7 @@ import { HomePageComponent } from './pages/home/home.component';
     MatTableModule,
     MatPaginatorModule,
     MatInputModule,
+    MatRippleModule,
     MatProgressSpinnerModule,
     FormsModule,
     BrowserAnimationsModule,
