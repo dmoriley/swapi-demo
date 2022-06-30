@@ -7,6 +7,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatButtonModule } from '@angular/material/button';
+
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -64,6 +66,7 @@ import { SpeciesPageComponent } from './pages/species-page/species-page.componen
     MatIconModule,
     MatDividerModule,
     MatSidenavModule,
+    MatButtonModule,
     MatListModule,
     MatTableModule,
     MatPaginatorModule,
