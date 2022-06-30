@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component, OnInit
 } from '@angular/core';
-import { BaseDataSource, SwapiPlanet, SwapiStarship } from 'src/app/lib';
+import { BaseDataSource, SwapiStarship } from 'src/app/lib';
 import { SwapiService } from 'src/app/lib/services/swapi/swapi.service';
 
 @Component({
