@@ -8,6 +8,7 @@ import {
   HomePageComponent,
   PeoplePageComponent,
   PlanetsPageComponent,
+  StarshipsPageComponent,
 } from './pages';
 
 const routes: Routes = [
@@ -32,6 +33,11 @@ const routes: Routes = [
     component: PlanetsPageComponent,
   },
   {
+    path: 'starships',
+    title: 'Starships',
+    component: StarshipsPageComponent,
+  },
+  {
     path: 'people/details/:id',
     title: 'People Details',
     canActivate: [PreventDirectNavigationGuard],
@@ -46,6 +52,12 @@ const routes: Routes = [
   {
     path: 'planets/details/:id',
     title: 'Planet Details',
+    canActivate: [PreventDirectNavigationGuard],
+    component: EntityDetailsPageComponent,
+  },
+  {
+    path: 'starships/details/:id',
+    title: 'Starship Details',
     canActivate: [PreventDirectNavigationGuard],
     component: EntityDetailsPageComponent,
   },

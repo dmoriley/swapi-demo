@@ -38,6 +38,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { LazyLoadDropdownComponent } from './lib/components/lazy-load-dropdown/lazy-load-dropdown.component';
 import { FilmsPageComponent } from './pages/films/films.component';
 import { PlanetsPageComponent } from './pages/planets/planets.component';
+import { StarshipsPageComponent } from './pages/starships-page/starships-page.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { PlanetsPageComponent } from './pages/planets/planets.component';
     LazyLoadDropdownComponent,
     FilmsPageComponent,
     PlanetsPageComponent,
+    StarshipsPageComponent,
   ],
   imports: [
     BrowserModule,
