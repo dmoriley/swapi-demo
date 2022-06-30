@@ -7,6 +7,7 @@ import {
   FilmsPageComponent,
   HomePageComponent,
   PeoplePageComponent,
+  PlanetsPageComponent,
 } from './pages';
 
 const routes: Routes = [
@@ -26,6 +27,11 @@ const routes: Routes = [
     component: FilmsPageComponent,
   },
   {
+    path: 'planets',
+    title: 'Planets',
+    component: PlanetsPageComponent,
+  },
+  {
     path: 'people/details/:id',
     title: 'People Details',
     canActivate: [PreventDirectNavigationGuard],
@@ -34,6 +40,12 @@ const routes: Routes = [
   {
     path: 'films/details/:id',
     title: 'Films Details',
+    canActivate: [PreventDirectNavigationGuard],
+    component: EntityDetailsPageComponent,
+  },
+  {
+    path: 'planets/details/:id',
+    title: 'Planet Details',
     canActivate: [PreventDirectNavigationGuard],
     component: EntityDetailsPageComponent,
   },
