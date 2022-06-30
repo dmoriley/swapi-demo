@@ -6,3 +6,4 @@ export * from './page-not-found/page-not-found.component';
 export * from './planets/planets.component';
 export * from './starships-page/starships-page.component';
 export * from './vehicles-page/vehicles-page.component';
+export * from './species-page/species-page.component';

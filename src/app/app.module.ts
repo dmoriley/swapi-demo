@@ -40,6 +40,7 @@ import { FilmsPageComponent } from './pages/films/films.component';
 import { PlanetsPageComponent } from './pages/planets/planets.component';
 import { StarshipsPageComponent } from './pages/starships-page/starships-page.component';
 import { VehiclesPageComponent } from './pages/vehicles-page/vehicles-page.component';
+import { SpeciesPageComponent } from './pages/species-page/species-page.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { VehiclesPageComponent } from './pages/vehicles-page/vehicles-page.compo
     PlanetsPageComponent,
     StarshipsPageComponent,
     VehiclesPageComponent,
+    SpeciesPageComponent,
   ],
   imports: [
     BrowserModule,

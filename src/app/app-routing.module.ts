@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EntityDetailsPageComponent } from '@pages/entity-details-page/entity-details-page.component';
 import { PageNotFoundComponent } from '@pages/page-not-found/page-not-found.component';
+import { SpeciesPageComponent } from '@pages/species-page/species-page.component';
 import { VehiclesPageComponent } from '@pages/vehicles-page/vehicles-page.component';
 import { PreventDirectNavigationGuard } from './lib/guards';
 import {
@@ -44,6 +45,11 @@ const routes: Routes = [
     component: VehiclesPageComponent,
   },
   {
+    path: 'species',
+    title: 'Species',
+    component: SpeciesPageComponent,
+  },
+  {
     path: 'people/details/:id',
     title: 'People Details',
     canActivate: [PreventDirectNavigationGuard],
@@ -70,6 +76,12 @@ const routes: Routes = [
   {
     path: 'vehicles/details/:id',
     title: 'Vehicles Details',
+    canActivate: [PreventDirectNavigationGuard],
+    component: EntityDetailsPageComponent,
+  },
+  {
+    path: 'species/details/:id',
+    title: 'Species Details',
     canActivate: [PreventDirectNavigationGuard],
     component: EntityDetailsPageComponent,
   },
