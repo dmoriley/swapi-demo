@@ -22,7 +22,7 @@ export class SwapiService {
    * @return { Observable<T | ApiError> } if the request is successful, it would return observable
    * of type T. If not, it would throw observable of type ApiError.
    */
-  getResource<T>(url: string, options: any = {}): Observable<T> {
+  getResource<T>(url: string, options: any = {}) {
     return this.http
       .get<T>(url, { ...options, observe: 'body', responseType: 'json' })
       .pipe(

@@ -20,6 +20,7 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
+*.code-workspace
 
 # Visual Studio Code
 .vscode/*
@@ -28,6 +29,9 @@ yarn-error.log
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
+
+# Angular
+.angular
 
 # Miscellaneous
 /.angular/cache

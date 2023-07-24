@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { OnDestroy } from '@angular/core';
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
-import { map, switchMap, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, of, Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
 
 export enum ViewportSize {
-  Unknown = 0,
-  XSmall = 1,
+  Unknown = 1,
+  XSmall,
   Small,
   Medium,
   Large,
@@ -64,7 +64,6 @@ export class BreakpointService implements OnDestroy {
           }
         }
         this._viewportSize.next(ViewportSize.Unknown);
-        console.log(this.viewportSize);
       });
   }
 
