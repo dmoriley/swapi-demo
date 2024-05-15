@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "server:local": "cd build && live-server",
+    "server:local": "live-server dist",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
