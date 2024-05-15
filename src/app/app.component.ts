@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DocumentService } from './lib';
 import { BreakpointService } from './lib/services/breakpoint/breakpoint.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +10,12 @@ import { BreakpointService } from './lib/services/breakpoint/breakpoint.service'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  isMobile$ = this.breakpointService.isMobile$;
+  isMobile$: Observable<boolean>;
 
   constructor(
     private breakpointService: BreakpointService,
-    private documentService: DocumentService // included here so document service initializes
-  ) {}
+    private documentService: DocumentService, // included here so document service initializes
+  ) {
+    this.isMobile$ = this.breakpointService.isMobile$;
+  }
 }

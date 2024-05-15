@@ -6,7 +6,7 @@ fieldset {
   div {
     display: grid;
     grid-template-columns: 150px 150px;
-    grid-template-rows: repeat(3, 150px);
+    grid-template-rows: repeat(3, 1fr);
     column-gap: 10px;
     row-gap: 10px;
     button {
@@ -19,7 +19,7 @@ fieldset {
   fieldset {
     div {
       grid-template-columns: repeat(3, 200px);
-      grid-template-rows: 200px 200px;
+      grid-template-rows: 1fr 1fr;
     }
   }
 }

@@ -1,7 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component, OnInit
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { BaseDataSource, SwapiPlanet } from 'src/app/lib';
 import { SwapiService } from 'src/app/lib/services/swapi/swapi.service';
 
@@ -13,13 +10,19 @@ import { SwapiService } from 'src/app/lib/services/swapi/swapi.service';
 })
 export class PlanetsPageComponent implements OnInit {
   dataSource: BaseDataSource<SwapiPlanet>;
-  displayedColumns = ['name', 'climate', 'terrain' ,'gravity', 'orbital_period'];
+  displayedColumns = [
+    'name',
+    'climate',
+    'terrain',
+    'gravity',
+    'orbital_period',
+  ];
   constructor(private swapi: SwapiService) {}
 
-
   ngOnInit(): void {
-    this.dataSource = new BaseDataSource(
-      this.swapi.getPageResource<SwapiPlanet>.bind(this.swapi, 'planets')
-    );
+    const resourceFunc = (page: number, search: string) => {
+      return this.swapi.getPageResource<SwapiPlanet>('planets', page, search);
+    };
+    this.dataSource = new BaseDataSource(resourceFunc);
   }
 }

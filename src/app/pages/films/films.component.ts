@@ -1,7 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component, OnInit
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { BaseDataSource } from 'src/app/lib';
 import { SwapiService } from 'src/app/lib/services/swapi/swapi.service';
 import { SwapiFilm } from 'src/app/lib/services/swapi/swapi.types';
@@ -14,13 +11,19 @@ import { SwapiFilm } from 'src/app/lib/services/swapi/swapi.types';
 })
 export class FilmsPageComponent implements OnInit {
   dataSource: BaseDataSource<SwapiFilm>;
-  displayedColumns = ['title', 'director', 'producer', 'episode_id', 'release_date'];
+  displayedColumns = [
+    'title',
+    'director',
+    'producer',
+    'episode_id',
+    'release_date',
+  ];
   constructor(private swapi: SwapiService) {}
 
-
   ngOnInit(): void {
-    this.dataSource = new BaseDataSource(
-      this.swapi.getPageResource<SwapiFilm>.bind(this.swapi, 'films')
-    );
+    const resourceFunc = (page: number, search: string) => {
+      return this.swapi.getPageResource<SwapiFilm>('films', page, search);
+    };
+    this.dataSource = new BaseDataSource(resourceFunc);
   }
 }

@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "starwars-demo:build:production"
+              "buildTarget": "starwars-demo:build:production"
             },
             "development": {
-              "browserTarget": "starwars-demo:build:development"
+              "buildTarget": "starwars-demo:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "starwars-demo:build"
+            "buildTarget": "starwars-demo:build"
           }
         },
         "test": {
