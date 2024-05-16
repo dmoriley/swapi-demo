@@ -20,7 +20,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 })
 export class LazyLoadDropdownComponent implements OnInit {
   isLoading = false;
-  data;
+  data: any;
 
   @Input() title: string;
   @Input() urls: string[];

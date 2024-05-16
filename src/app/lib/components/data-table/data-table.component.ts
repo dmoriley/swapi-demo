@@ -4,21 +4,14 @@ import {
   Component,
   ElementRef,
   Input,
-  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import {
-  debounceTime,
-  distinctUntilChanged,
-  fromEvent,
-  Subject,
-  takeUntil,
-  tap,
-} from 'rxjs';
+import { debounceTime, distinctUntilChanged, fromEvent, tap } from 'rxjs';
 import { BaseDataSource } from '../../classes';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -42,9 +35,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./data-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DataTableComponent implements OnInit, AfterViewInit, OnDestroy {
-  private _isDestroyed = new Subject<void>();
-
+export class DataTableComponent implements OnInit, AfterViewInit {
   @Input() dataSource: BaseDataSource<any>;
   @Input() displayedColumns: string[];
 
@@ -63,14 +54,14 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this.paginator.page
       .pipe(
-        takeUntil(this._isDestroyed),
+        takeUntilDestroyed(),
         tap(() => this.loadPage()),
       )
       .subscribe();
 
     fromEvent(this.filterInput.nativeElement, 'keyup')
       .pipe(
-        takeUntil(this._isDestroyed),
+        takeUntilDestroyed(),
         debounceTime(300),
         distinctUntilChanged(),
         tap(() => {
@@ -79,11 +70,6 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnDestroy {
         }),
       )
       .subscribe();
-  }
-
-  ngOnDestroy(): void {
-    this._isDestroyed.next();
-    this._isDestroyed.complete();
   }
 
   loadPage() {
