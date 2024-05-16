@@ -1,23 +1,27 @@
 <mat-card class="example-card">
-  <mat-card-title>{{ extras.state.name }}</mat-card-title>
-  <mat-card-content *ngIf="data$ | async | keyvalue as data">
-    <mat-divider></mat-divider>
-    <mat-list role="list">
-      <ng-container *ngFor="let row of data; index as i">
-        <ng-container
-          [ngTemplateOutlet]="isArray(row.value) ? expansionRow : staticRow"
-          [ngTemplateOutletContext]="{ $implicit: row, index: i }"
-        ></ng-container>
-      </ng-container>
-    </mat-list>
-  </mat-card-content>
+  <mat-card-title>{{ extras.state["name"] }}</mat-card-title>
+  @if (data$ | async | keyvalue; as data) {
+    <mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-list role="list">
+        @for (row of data; track row.key; let i = $index) {
+          <ng-container
+            [ngTemplateOutlet]="isArray(row.value) ? expansionRow : staticRow"
+            [ngTemplateOutletContext]="{ $implicit: row, index: i }"
+          ></ng-container>
+        }
+      </mat-list>
+    </mat-card-content>
+  }
   <mat-card-actions>
     <button mat-button>LIKE</button>
     <button mat-button>SHARE</button>
   </mat-card-actions>
-  <mat-card-footer *ngIf="isLoading$ | async">
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-  </mat-card-footer>
+  @if (isLoading$ | async) {
+    <mat-card-footer>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
+  }
 </mat-card>
 
 <ng-template #staticRow let-rowData>

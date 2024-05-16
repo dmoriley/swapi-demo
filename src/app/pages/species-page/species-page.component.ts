@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { BaseDataSource, SwapiSpecies } from 'src/app/lib';
+import { DataTableComponent } from 'src/app/lib/components';
 import { SwapiService } from 'src/app/lib/services/swapi/swapi.service';
 
 @Component({
+  standalone: true,
+  imports: [DataTableComponent],
   selector: 'app-species-page',
   templateUrl: './species-page.component.html',
   styleUrls: ['./species-page.component.scss'],

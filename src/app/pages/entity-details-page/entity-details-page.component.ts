@@ -1,22 +1,40 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { BehaviorSubject, finalize, first, map, Subject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
+import { BehaviorSubject, finalize, first, map, Observable } from 'rxjs';
 import { SwapiBase, SwapiService } from 'src/app/lib/services';
+import { LazyLoadDropdownComponent } from 'src/app/lib/components/lazy-load-dropdown/lazy-load-dropdown.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
+  imports: [
+    MatCardModule,
+    MatDividerModule,
+    MatListModule,
+    MatProgressBarModule,
+    LazyLoadDropdownComponent,
+    CommonModule,
+  ],
   selector: 'app-entity-details-page',
   templateUrl: './entity-details-page.component.html',
   styleUrls: ['./entity-details-page.component.scss'],
 })
-export class EntityDetailsPageComponent implements OnInit, OnDestroy {
-  private _isDestroyed = new Subject<void>();
+export class EntityDetailsPageComponent implements OnInit {
   private _isLoading = new BehaviorSubject(false);
 
   isLoading$ = this._isLoading.asObservable();
-  extras;
-  data$;
+  extras: NavigationExtras;
+  data$: Observable<any>;
 
-  constructor(private router: Router, private swapiService: SwapiService) {
+  constructor(
+    private router: Router,
+    private swapiService: SwapiService,
+  ) {
     const { extras } = this.router.getCurrentNavigation() ?? {};
     // get the navigation extras in constructor while router is still resolving
     this.extras = extras;
@@ -49,13 +67,8 @@ export class EntityDetailsPageComponent implements OnInit, OnDestroy {
           }
           return data;
         }),
-        finalize(() => this._isLoading.next(false))
+        finalize(() => this._isLoading.next(false)),
       );
-  }
-
-  ngOnDestroy(): void {
-    this._isDestroyed.next();
-    this._isDestroyed.complete();
   }
 }
 

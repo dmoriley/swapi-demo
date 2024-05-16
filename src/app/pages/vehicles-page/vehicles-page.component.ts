@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { BaseDataSource, SwapiVehicle } from 'src/app/lib';
+import { DataTableComponent } from 'src/app/lib/components';
 import { SwapiService } from 'src/app/lib/services/swapi/swapi.service';
 
 @Component({
+  standalone: true,
+  imports: [DataTableComponent],
   selector: 'app-vehicles-page',
   templateUrl: './vehicles-page.component.html',
   styleUrls: ['./vehicles-page.component.scss'],

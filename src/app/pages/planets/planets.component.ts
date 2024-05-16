@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { BaseDataSource, SwapiPlanet } from 'src/app/lib';
+import { DataTableComponent } from 'src/app/lib/components';
 import { SwapiService } from 'src/app/lib/services/swapi/swapi.service';
 
 @Component({
+  standalone: true,
+  imports: [DataTableComponent],
   selector: 'app-planets',
   templateUrl: './planets.component.html',
   styleUrls: ['./planets.component.scss'],
