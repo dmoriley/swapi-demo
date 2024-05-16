@@ -33,26 +33,24 @@ import {
   WINDOW,
   windowFactory,
 } from './lib';
-import { DataTableComponent } from './lib/components/data-table/data-table.component';
 import { EntityDetailsPageComponent } from './pages/entity-details-page/entity-details-page.component';
 import { HomePageComponent } from './pages/home/home.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { LazyLoadDropdownComponent } from './lib/components/lazy-load-dropdown/lazy-load-dropdown.component';
 import { FilmsPageComponent } from './pages/films/films.component';
 import { PlanetsPageComponent } from './pages/planets/planets.component';
 import { StarshipsPageComponent } from './pages/starships-page/starships-page.component';
 import { VehiclesPageComponent } from './pages/vehicles-page/vehicles-page.component';
 import { SpeciesPageComponent } from './pages/species-page/species-page.component';
+import { DataTableComponent } from './lib/components';
+import { LazyLoadDropdownComponent } from './lib/components/lazy-load-dropdown/lazy-load-dropdown.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PeoplePageComponent,
-    DataTableComponent,
     EntityDetailsPageComponent,
     PageNotFoundComponent,
     HomePageComponent,
-    LazyLoadDropdownComponent,
     FilmsPageComponent,
     PlanetsPageComponent,
     StarshipsPageComponent,
@@ -79,6 +77,8 @@ import { SpeciesPageComponent } from './pages/species-page/species-page.componen
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    DataTableComponent,
+    LazyLoadDropdownComponent,
   ],
   providers: [
     { provide: WINDOW, useFactory: windowFactory },
@@ -86,6 +86,5 @@ import { SpeciesPageComponent } from './pages/species-page/species-page.componen
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
-  exports: [DataTableComponent],
 })
 export class AppModule {}

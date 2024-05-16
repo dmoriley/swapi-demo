@@ -20,7 +20,23 @@ import {
   tap,
 } from 'rxjs';
 import { BaseDataSource } from '../../classes';
+import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
+
 @Component({
+  standalone: true,
+  imports: [
+    MatTableModule,
+    MatProgressSpinnerModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatIconModule,
+    CommonModule,
+  ],
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.scss'],
@@ -35,7 +51,10 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('filterInput') filterInput: ElementRef;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.dataSource.loadItems();
@@ -45,7 +64,7 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnDestroy {
     this.paginator.page
       .pipe(
         takeUntil(this._isDestroyed),
-        tap(() => this.loadPage())
+        tap(() => this.loadPage()),
       )
       .subscribe();
 
@@ -57,7 +76,7 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnDestroy {
         tap(() => {
           this.paginator.pageIndex = 0;
           this.loadPage();
-        })
+        }),
       )
       .subscribe();
   }
@@ -70,7 +89,7 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnDestroy {
   loadPage() {
     this.dataSource.loadItems(
       this.paginator.pageIndex + 1,
-      this.filterInput.nativeElement.value
+      this.filterInput.nativeElement.value,
     );
   }
 
@@ -83,7 +102,7 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnDestroy {
   navigateToDetailsPage(row: any) {
     this.router.navigate(
       [`/${this.route.snapshot.url[0].path}/details`, row.name || row.title],
-      { state: { url: row.url, name: row.name || row.title } }
+      { state: { url: row.url, name: row.name || row.title } },
     );
   }
 }
