@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { OnDestroy } from '@angular/core';
-import { BehaviorSubject, of, Subject } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BehaviorSubject, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 export enum ViewportSize {
   Unknown = 1,
@@ -17,8 +17,7 @@ export enum ViewportSize {
 @Injectable({
   providedIn: 'root',
 })
-export class BreakpointService implements OnDestroy {
-  private isDestroyed$ = new Subject<void>();
+export class BreakpointService {
   private displayNameMap = new Map([
     [Breakpoints.XSmall, ViewportSize.XSmall],
     [Breakpoints.Small, ViewportSize.Small],
@@ -27,7 +26,7 @@ export class BreakpointService implements OnDestroy {
     [Breakpoints.XLarge, ViewportSize.XLarge],
   ]);
   private _viewportSize = new BehaviorSubject<ViewportSize>(
-    ViewportSize.Unknown
+    ViewportSize.Unknown,
   );
 
   /** Snapshot of the viewport size right now */
@@ -37,7 +36,7 @@ export class BreakpointService implements OnDestroy {
 
   /** Observable if the viewport is mobile size (<= 599.98px) */
   isMobile$ = this.viewportSize$.pipe(
-    switchMap((size) => of(size === ViewportSize.XSmall))
+    switchMap((size) => of(size === ViewportSize.XSmall)),
   );
   /** Snapshot if currently the viewport is mobile size (<= 599.98px) */
   get isMobile() {
@@ -53,22 +52,17 @@ export class BreakpointService implements OnDestroy {
         Breakpoints.Large,
         Breakpoints.XLarge,
       ])
-      .pipe(takeUntil(this.isDestroyed$))
+      .pipe(takeUntilDestroyed())
       .subscribe((result) => {
         for (const query of Object.keys(result.breakpoints)) {
           if (result.breakpoints[query]) {
             this._viewportSize.next(
-              this.displayNameMap.get(query) as ViewportSize
+              this.displayNameMap.get(query) as ViewportSize,
             );
             return;
           }
         }
         this._viewportSize.next(ViewportSize.Unknown);
       });
-  }
-
-  ngOnDestroy(): void {
-    this.isDestroyed$.next();
-    this.isDestroyed$.complete();
   }
 }

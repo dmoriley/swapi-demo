@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   ElementRef,
   Input,
   OnInit,
@@ -45,6 +46,7 @@ export class DataTableComponent implements OnInit, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private destroyRef: DestroyRef,
   ) {}
 
   ngOnInit(): void {
@@ -54,15 +56,15 @@ export class DataTableComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.paginator.page
       .pipe(
-        takeUntilDestroyed(),
+        takeUntilDestroyed(this.destroyRef),
         tap(() => this.loadPage()),
       )
       .subscribe();
 
     fromEvent(this.filterInput.nativeElement, 'keyup')
       .pipe(
-        takeUntilDestroyed(),
-        debounceTime(300),
+        takeUntilDestroyed(this.destroyRef),
+        debounceTime(350),
         distinctUntilChanged(),
         tap(() => {
           this.paginator.pageIndex = 0;
